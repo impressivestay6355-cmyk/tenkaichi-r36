@@ -42,8 +42,8 @@ the works upstream.
 
 ## License
 
-The game program (`dbzbt3/bt3.aarch64`) is AGPL-3.0, like Tenkaichi3Decomp. Its full source code is
-`tenkaichi-r36-source-v1.0.zip` on the release page. The launcher and docs in this repo are MIT ([LICENSE](LICENSE)).
+The game program (`dbzbt3/bt3.aarch64`) is AGPL-3.0, like Tenkaichi3Decomp. Its full source code is the
+source zip on each release page. The launcher and docs in this repo are MIT ([LICENSE](LICENSE)).
 Credits are in [CREDITS.md](CREDITS.md) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 Have fun!

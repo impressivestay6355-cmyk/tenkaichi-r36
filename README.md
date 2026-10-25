@@ -1,4 +1,4 @@
-# Dragon Ball Z: Budokai Tenkaichi 3 — R36S port
+# Dragon Ball Z: Budokai Tenkaichi 3 — Port for Retro handhelds
 
 Budokai Tenkaichi 3, running natively on your handheld. Not an emulator: the game's code is compiled straight for
 the device, with a renderer tuned for the little Mali-G31 GPU.

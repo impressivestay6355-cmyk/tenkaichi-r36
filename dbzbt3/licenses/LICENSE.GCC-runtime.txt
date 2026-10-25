@@ -1,0 +1,13 @@
+bt3.aarch64 statically links the GCC runtime libraries libstdc++.a (GCC 7.5.0) and libgcc.a (GCC 7.5.0), taken
+unmodified from the Ubuntu 18.04 cross packages libstdc++-7-dev-arm64-cross and libgcc-7-dev-arm64-cross
+(7.5.0-3ubuntu1~18.04cross1); port/tools/r36s_toolchain.sh fetches them.
+Copyright Free Software Foundation, Inc. and contributors.
+
+libstdc++ and libgcc are distributed under the GNU General Public License version 3 with the GCC Runtime Library
+Exception version 3.1 (LICENSE.GCC-exception.txt). The exception applies: the program was produced with an eligible
+compilation process (LLVM clang and lld, no GPL-incompatible software), so linking these libraries places no
+licence condition on the program.
+
+GCC source: https://ftp.gnu.org/gnu/gcc/gcc-7.5.0/gcc-7.5.0.tar.xz
+Ubuntu source package: https://launchpad.net/ubuntu/+source/gcc-7-cross
+GPL version 3: https://www.gnu.org/licenses/gpl-3.0.txt

@@ -1,0 +1,11 @@
+The GNU C Library (glibc) is not distributed with this port: the programs load the device's own libc, libm,
+libpthread, libdl and the dynamic loader at run time (LGPL-2.1-or-later, or the licence the CFW ships them under).
+
+The only glibc-derived objects linked into bt3.aarch64, bt3-install.aarch64 and bt3-progress.aarch64 are the
+program start-up files (crt1.o, crti.o, crtn.o) and libc_nonshared.a of glibc 2.27 (Ubuntu 18.04 package
+libc6-dev-arm64-cross 2.27-3ubuntu1cross1.1), which glibc licenses with this exception: "As a special exception, if
+you link this file with other files to produce an executable, this file does not by itself cause the resulting
+executable to be covered by the GNU Lesser General Public License."
+
+glibc source: https://ftp.gnu.org/gnu/glibc/glibc-2.27.tar.xz
+Licence: https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html

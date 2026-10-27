@@ -81,9 +81,9 @@ fi
 
 [ -f "$GAMEDIR/bt3_settings.txt" ] || cp "$GAMEDIR/bt3_settings.default.txt" "$GAMEDIR/bt3_settings.txt"
 grep -q '^alpha_fetch4=' "$GAMEDIR/bt3_settings.txt" && sed -i '/^alpha_fetch4=/d;s/^alpha_fetch=1/alpha_fetch=0/' "$GAMEDIR/bt3_settings.txt"
-if ! grep -q '^r36s_defaults=4' "$GAMEDIR/bt3_settings.txt"; then
+if ! grep -q '^r36s_defaults=5' "$GAMEDIR/bt3_settings.txt"; then
   sed -i '/^fx_off=/d;/^frameskip=/d;/^scale4=/d;/^scale=/d;/^r36s_defaults=/d' "$GAMEDIR/bt3_settings.txt"
-  printf 'fx_off=63\nframeskip=2\nscale4=3\nr36s_defaults=4\n' >> "$GAMEDIR/bt3_settings.txt"
+  printf 'fx_off=63\nframeskip=0\nscale4=3\nr36s_defaults=5\n' >> "$GAMEDIR/bt3_settings.txt"
 fi
 mkdir -p "$GAMEDIR/saves" "$GAMEDIR/textures" "$GAMEDIR/stages" "$GAMEDIR/songs" "$GAMEDIR/gamedata/mods"
 
@@ -296,13 +296,6 @@ fi
 [ -n "$old_cpu" ] && echo "$old_cpu" | $ESUDO tee /sys/devices/system/cpu/cpufreq/policy*/scaling_governor /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null 2>&1
 for i in $wifi_ps; do $ESUDO iw dev "$i" set power_save on 2>/dev/null; done
 
-if [ $status -ne 0 ] && grep -q "no OpenGL ES 3.0 context\|could not start" "$GAMEDIR/log.txt"; then
-  msg "The GPU could not be started: an OpenGL ES 3 driver (Mali-G31 or newer) is needed. Details in ports/dbzbt3/log.txt."
-  sleep 15
-elif [ $status -ge 128 ] && [ $status -ne 137 ] && [ $status -ne 143 ]; then
-  msg "Tenkaichi 3 stopped (signal $((status - 128))). Please share ports/dbzbt3/log.txt."
-  sleep 10
-fi
 
 for svc in $STOPPED_SVC; do $ESUDO systemctl start "$svc" > /dev/null 2>&1; done
 finish

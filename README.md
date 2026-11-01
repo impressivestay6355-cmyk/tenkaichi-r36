@@ -1,4 +1,4 @@
-# Dragon Ball Z: Budokai Tenkaichi 3 and 4 for R36S-class handhelds
+# Dragon Ball Z: Budokai Tenkaichi 3 and 4 for Retro handhelds
 
 Native ports of **Budokai Tenkaichi 3** (USA, `SLUS-21678`) and **Budokai Tenkaichi 4 Tag Team** (B14 Rev2, Spanish or English) for
 PortMaster handhelds (R36S, R36H and the like: aarch64, OpenGL ES 3, Mali-G31 or newer, 1 GB RAM). They run the games' own code

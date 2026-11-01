@@ -1,13 +1,13 @@
 # Dragon Ball Z: Budokai Tenkaichi 3 and 4 for Retro handhelds
 
 Native ports of **Budokai Tenkaichi 3** (USA, `SLUS-21678`) and **Budokai Tenkaichi 4 Tag Team** (B14 Rev2, Spanish or English) for
-PortMaster handhelds (R36S, R36H and the like: aarch64, OpenGL ES 3, Mali-G31 or newer, 1 GB RAM). They run the games' own code
+PortMaster handhelds (R36S,and consoles compatible with Portmaster, aarch64). They run the games' own code
 compiled for the handheld; they are not emulators. **No game data is included**: you need your own disc images.
 
 | Folder | Port | Built on |
 |---|---|---|
 | [`bt3/`](bt3) | Budokai Tenkaichi 3 | [Tenkaichi3Decomp](https://github.com/z3xox/Tenkaichi3Decomp) (z3xox) + [Tenkaichi3Decomp-Vita](https://github.com/arielxflores/Tenkaichi3Decomp-Vita) renderer (arielxflores) |
-| [`bt4/`](bt4) | Budokai Tenkaichi 4 Tag Team (mod by [Team BT4](https://teambt4.wixsite.com/teambt4projects/descarga)) | [BT4decomp](https://github.com/NauTaro/DBZ-BT4-Tag-Team-Decomp) (NauTaro), itself built on Tenkaichi3Decomp |
+| [`bt4/`](bt4) | Budokai Tenkaichi 4 (mod by [Team BT4](https://teambt4.wixsite.com/teambt4projects/descarga)) | [BT4decomp](https://github.com/NauTaro/DBZ-BT4-Tag-Team-Decomp) (NauTaro), itself built on Tenkaichi3Decomp |
 
 ## Releases
 

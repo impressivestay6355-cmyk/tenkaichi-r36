@@ -1,13 +1,12 @@
 gpu_api=1
 fullscreen=1
-scale4=3
-fx_off=63
+fx_off=56
 aspect_milli=1333
 interp=0
 smooth_2d=1
 filter=0
 frameskip=0
-r36s_defaults=5
+r36s_defaults=8
 key_p1_up=82
 pad_p1_up=11
 key_p1_down=81

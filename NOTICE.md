@@ -1,5 +1,7 @@
 # Notice: provenance and licences
 
+> Paths like `bt3/...`, `bt4/...` and `licenses/...` refer to the source zips on the release page (`dbz-bt3-r36s-source.zip`, `dbz-bt4-r36s-source.zip`). Licence texts are in `licenses/` inside each package (`dbzbt3/licenses`, `dbzbt4/licenses`) and in `licenses-all/` inside each source zip.
+
 This repository combines the work of several authors. Each keeps their copyright; each work stays under its own licence.
 
 ## 1. Tenkaichi3Decomp: z3xox and contributors
@@ -9,7 +11,8 @@ This repository combines the work of several authors. Each keeps their copyright
 - It provides the decompiled game code (`src/`, `include/`), the native runtime (`port/src`, `port/include`), the in-game updater and the
   Tenkaichi Budokai Online screens. Its README states that the decompiled game code is not covered by the MIT licence and that rights in it
   belong to the game's rights holders.
-- Contributors credited in the code: dfdx047 (Android port), JosephLlacchua (in-game update download, PR #107).
+- Contributors credited in the code: RexxColder (OpenGL renderer, custom stages and songs), dfdx047 (Tenkaichi3DecompAndroid, whose work the project builds on), JosephLlacchua (in-game update download, PR #107), bmdhacks (SDL3 build with an SDL2 backend, zlib; `licenses/LICENSE.SDL3-sdl2-backend.txt`).
+- The Android app and its build files are not included here (they are not part of the handheld packages).
 
 ## 2. Tenkaichi3Decomp-Vita: arielxflores
 
@@ -27,12 +30,12 @@ This repository combines the work of several authors. Each keeps their copyright
 - BT4 content, artwork and icons retain their respective authors' rights (`bt4/docs/presentation/CREDITS.md`).
 - **Online play in the BT4 port is NauTaro's service.** The handheld client talks to the same rooms as the PC version. The matchmaking Worker in
   `bt4/port/matchmaking` is an optional fallback for 1 vs 1 room codes only. As the AGPL requires for network services, the source of the
-  services is in this repository (`bt4/cloudflare`, `bt4/supabase`, `bt4/port/matchmaking`).
+  services is in the BT4 source zip (`bt4/cloudflare`, `bt4/supabase`, `bt4/port/matchmaking`).
 
 ## 3b. Budokai Tenkaichi 4 (the game): Team BT4
 
-- Budokai Tenkaichi 4 (B14 Rev2) is a modified version of the Budokai Tenkaichi 3 game (a mod for the PlayStation 2) created by **Team BT4 / TeamBT4 Projects**: <https://teambt4.wixsite.com/teambt4projects/descarga>.
-- Nothing of Team BT4's mod is distributed here. The BT4 disc image (ISO) is a modified version of the Budokai Tenkaichi 3 game, created by Team BT4, and is not included: the user gets it from their official site and supplies their own copy. The port only reads that copy on the first start. The site states no licence terms; all rights in the mod, its content and artwork remain with Team BT4 and the respective authors.
+- Budokai Tenkaichi 4 (B14 Rev2) is a modified version of the Budokai Tenkaichi 3 game (a mod for the PlayStation 2) created by **Team BT4 / TeamBT4 Projects**.
+- Nothing of Team BT4's mod is distributed here. The BT4 disc image (ISO) is a modified version of the Budokai Tenkaichi 3 game, created by Team BT4, and is not included: the user supplies their own copy. The port only reads that copy on the first start. The site states no licence terms; all rights in the mod, its content and artwork remain with Team BT4 and the respective authors.
 
 ## 4. Handheld (R36S) port: ImpressiveStay (assisted by AI)
 

@@ -1,22 +1,21 @@
-# Getting the game
+# Getting the game files
 
-*Dragon Ball Z: Budokai Tenkaichi 3* is a commercial PS2 game. Make a disc image (`.iso`) from your own original
-disc, for example with ImgBurn (Windows) or `dd` (Linux):
+This project does not host or link to disc images, and includes no game data. You need your own copy.
 
-```sh
-dd if=/dev/sr0 of=bt3.iso bs=2048 status=progress
-```
+## BT3 (`dbzbt3`)
 
-This project does not host or link to disc images.
+- Make a disc image (`.iso`) from your own original *Dragon Ball Z: Budokai Tenkaichi 3* disc, **USA release (SLUS-21678)**. The installer checks for it.
+- `.iso` only: `.chd`, `.cso` or `.7z` must be converted back to `.iso` first.
+- Put the file in `ports/dbzbt3/assets/` and start the port. The first start copies the game's files (about 4 GB free space, 5 to 15 minutes); the `.iso` can be deleted afterwards.
+- Optional: a dump of your own European disc (SLES-54945) adds European languages; the USA disc is still required.
 
-- Use the **USA** release, `SLUS-21678`. The installer checks it.
-- `.iso` only (not `.chd`, `.cso` or `.7z`: convert them back to `.iso` first).
-- A modified image (a translation, a mod) installs too: its data is used, its changes to the game's program code
-  are not.
+## BT4 (`dbzbt4`)
 
-Put the `.iso` in `ports/dbzbt3/assets/` and start the port.
+- *Budokai Tenkaichi 4* (B14 Rev2) is a modified version of the Budokai Tenkaichi 3 game made by **Team BT4**: you need your own copy of the disc image (Spanish LATINO or English). It is not included and not linked here.
+- Put the `.iso` in `ports/dbzbt4/assets/`. Both languages are allowed: put both and the game asks which one to play.
+- The first start copies the game's files (about 4 GB per language); the `.iso` can be deleted afterwards.
 
-## Optional: the European disc
+## Making an image of your own disc
 
-A dump of your own European disc (*Budokai Tenkaichi 3*, `SLES-54945`) next to the USA one adds the European
-languages: about 60 files are copied from it at the next start. The USA disc is still needed.
+- Windows: ImgBurn ("Create image file from disc").
+- Linux: `dd if=/dev/sr0 of=game.iso bs=2048 status=progress`

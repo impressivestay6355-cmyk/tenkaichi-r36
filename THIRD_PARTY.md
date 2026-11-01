@@ -1,6 +1,6 @@
 # Third-party components
 
-Texts of all licences are in [`licenses/`](licenses). "R36S" = linked into the handheld packages; "PC / other" = in the source tree for other targets only.
+Texts of all licences are in [`dbzbt3/licenses`](dbzbt3/licenses) and [`dbzbt4/licenses`](dbzbt4/licenses), and in `licenses-all/` inside each source zip. "R36S" = linked into the handheld packages; "PC / other" = in the source tree for other targets only.
 
 | Component | Use | Licence | Where |
 |---|---|---|---|
@@ -26,7 +26,6 @@ Texts of all licences are in [`licenses/`](licenses). "R36S" = linked into the h
 | nlohmann/json | JSON | MIT | R36S (BT4) |
 | Opus | Voice codec | BSD-3-Clause | PC / R36S sources (BT4) |
 | libsrtp, OpenSSL, winpthreads | Voice runtime on Windows | BSD / OpenSSL / MIT-style | PC (BT4) |
-| libadrenotools | Android GPU driver loading | BSD-2-Clause | Android |
 | vitaGL, vitaShaRK, SceShaccCgExt, math-neon, vitasdk | PlayStation Vita build | LGPL-3.0 / GPL-3.0 / MIT | Vita |
 
 Combining AGPL-3.0 code with GPL-3.0 code (xBRZ) is allowed by AGPL-3.0 section 13; the combined work is distributed under AGPL-3.0 with the GPL-3.0 parts

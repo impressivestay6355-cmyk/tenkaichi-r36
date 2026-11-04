@@ -58,6 +58,10 @@ See [NOTICE.md](NOTICE.md) for who wrote what and under which licence, and [THIR
 - **Tenkaichi3Decomp (z3xox):** [repository](https://github.com/z3xox/Tenkaichi3Decomp)
 - **Tenkaichi3Decomp-Vita (arielxflores):** [repository](https://github.com/arielxflores/Tenkaichi3Decomp-Vita)
 
+## Support
+
+If you enjoy these ports and want to support their development, you can do so on [Ko-fi](https://ko-fi.com/impressivestay63).
+
 ## Licence
 
 Source code: **AGPL-3.0** ([LICENSE](LICENSE)) and, for the parts of Tenkaichi3Decomp released under it, **MIT** ([LICENSE-MIT](LICENSE-MIT)).

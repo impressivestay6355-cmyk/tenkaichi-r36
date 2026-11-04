@@ -82,6 +82,7 @@ fi
 [ -f "$GAMEDIR/bt3_settings.txt" ] || cp "$GAMEDIR/bt3_settings.default.txt" "$GAMEDIR/bt3_settings.txt"
 grep -q '^alpha_fetch4=' "$GAMEDIR/bt3_settings.txt" && sed -i '/^alpha_fetch4=/d;s/^alpha_fetch=1/alpha_fetch=0/' "$GAMEDIR/bt3_settings.txt"
 if ! grep -q '^r36s_defaults=8' "$GAMEDIR/bt3_settings.txt"; then
+  # (8: the PS Vita port's renderer: glare/glow, distance blur and movement blur off (fx_off 56, the settings window turns them on), no frame skipping)
   sed -i '/^fx_off=/d;/^frameskip=/d;/^scale4=/d;/^scale=/d;/^scale_auto=/d;/^water=/d;/^shadows=/d;/^r36s_defaults=/d' "$GAMEDIR/bt3_settings.txt"
   printf 'fx_off=56\nframeskip=0\nr36s_defaults=8\n' >> "$GAMEDIR/bt3_settings.txt"
 fi
@@ -295,6 +296,7 @@ if [ -n "$dmcfreq" ]; then
 fi
 [ -n "$old_cpu" ] && echo "$old_cpu" | $ESUDO tee /sys/devices/system/cpu/cpufreq/policy*/scaling_governor /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null 2>&1
 for i in $wifi_ps; do $ESUDO iw dev "$i" set power_save on 2>/dev/null; done
+
 
 for svc in $STOPPED_SVC; do $ESUDO systemctl start "$svc" > /dev/null 2>&1; done
 finish

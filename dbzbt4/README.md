@@ -33,17 +33,3 @@ Voice chat is not available (no microphone).
 
 Saves in `saves/`, settings in `bt3_settings.txt`, the log in `log.txt`.
 To install again: delete `gamedata/` and the `.iso.done` marker next to the disc image.
-
-## Credits and licences
-
-- Budokai Tenkaichi 4 (the modified Budokai Tenkaichi 3 game this port runs, B14 Rev2): **Team BT4 / TeamBT4 Projects**, https://teambt4.wixsite.com/teambt4projects/descarga
-- BT4decomp (BT4 Tag Team decompilation, Tag Team, tournaments, spectators, voice, online services): **NauTaro**, https://github.com/NauTaro/DBZ-BT4-Tag-Team-Decomp, AGPL-3.0
-- Tenkaichi3Decomp (BT3 decompilation and native runtime): **z3xox** and contributors, https://github.com/z3xox/Tenkaichi3Decomp, AGPL-3.0 and MIT
-- Tenkaichi3Decomp-Vita (renderer): **arielxflores**, https://github.com/arielxflores/Tenkaichi3Decomp-Vita, AGPL-3.0
-- Also credited by the Vita port: BT3-Decompiled's authors (the decompilation); Spike, developer of Dragon Ball Z: Budokai Tenkaichi 3; Rinnegatamante (vitaGL, vitaShaRK); bythos14 (SceShaccCgExt); GrapheneCt (CapUnlocker); the VitaSDK team
-- Handheld port: **ImpressiveStay** (assisted by AI), AGPL-3.0
-- Interface art: MarshallPunk, pluantoine (CC BY 4.0)
-- Online play uses NauTaro's BT4decomp services; the same rooms as the PC version.
-- Every licence text is in `licenses/`; `licenses/NOTICE.txt` says who wrote what. The source of this exact package is in the release's source zip.
-- Fan project, not affiliated with Bandai Namco, Shueisha, Toei Animation or any rights holder. No game data is included.
-- Team BT4: nothing of their mod is distributed with this port. The BT4 disc image (ISO) is a modified version of the Budokai Tenkaichi 3 game, created by Team BT4, and is not included; get it from their official site and supply your own copy. The port only reads it on the first start.

@@ -33,6 +33,8 @@ DEVICE_ARCH=${DEVICE_ARCH:-aarch64}
 
 $ESUDO chmod +x "$GAMEDIR/bt4.aarch64" "$GAMEDIR/bt4-install.aarch64" "$GAMEDIR/bt3-progress.aarch64" 2> /dev/null
 
+# The first start: the game's files from your own BT4 B14 Rev2 disc (LATINO or English). A disc of the other language
+# put in assets/ later is added beside the first (the game then asks which language to play).
 shopt -s nullglob nocaseglob
 discs=("$GAMEDIR"/assets/*.iso)
 shopt -u nullglob nocaseglob
@@ -67,10 +69,12 @@ fi
 [ -f "$GAMEDIR/bt3_settings.txt" ] || cp "$GAMEDIR/bt3_settings.default.txt" "$GAMEDIR/bt3_settings.txt"
 grep -q '^alpha_fetch4=' "$GAMEDIR/bt3_settings.txt" && sed -i '/^alpha_fetch4=/d;s/^alpha_fetch=1/alpha_fetch=0/' "$GAMEDIR/bt3_settings.txt"
 if ! grep -q '^r36s_defaults=8' "$GAMEDIR/bt3_settings.txt"; then
+  # (8: the PS Vita port's renderer: glare/glow, distance blur and movement blur off (fx_off 56, the settings window turns them on), no frame skipping)
   sed -i '/^fx_off=/d;/^frameskip=/d;/^scale4=/d;/^scale=/d;/^scale_auto=/d;/^water=/d;/^shadows=/d;/^r36s_defaults=/d' "$GAMEDIR/bt3_settings.txt"
   printf 'fx_off=56\nframeskip=0\nr36s_defaults=8\n' >> "$GAMEDIR/bt3_settings.txt"
 fi
 mkdir -p "$GAMEDIR/saves" "$GAMEDIR/textures" "$GAMEDIR/stages" "$GAMEDIR/songs" "$GAMEDIR/gamedata/mods" "$GAMEDIR/network"
+# (online: the room service's sign-in kept here, not in the home folder)
 export BT4_SIGNAL_SESSION_DIR="$GAMEDIR/network"
 
 if [ ${#sdl_controllerconfig} -lt 100000 ]; then
@@ -278,6 +282,7 @@ if [ -n "$dmcfreq" ]; then
 fi
 [ -n "$old_cpu" ] && echo "$old_cpu" | $ESUDO tee /sys/devices/system/cpu/cpufreq/policy*/scaling_governor /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null 2>&1
 for i in $wifi_ps; do $ESUDO iw dev "$i" set power_save on 2>/dev/null; done
+
 
 for svc in $STOPPED_SVC; do $ESUDO systemctl start "$svc" > /dev/null 2>&1; done
 finish

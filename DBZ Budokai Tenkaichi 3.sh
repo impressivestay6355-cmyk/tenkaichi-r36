@@ -179,11 +179,36 @@ for w in /sys/class/net/wlan*; do
   echo "wifi: $i power saving off"
 done
 
+# the Wi-Fi's background scans off while the game runs (a scan takes the radio off its channel for a moment, and the
+# online play then waits for the other player's input); the connection stays up. Only a network that has its own
+# setting for them is changed, and it is put back at the exit.
+wifi_bg=""
+if command -v wpa_cli > /dev/null 2>&1; then
+  for w in /sys/class/net/wlan*; do
+    [ -e "$w" ] || continue
+    i=$(basename "$w")
+    id=$($ESUDO wpa_cli -i "$i" status 2>/dev/null | sed -n 's/^id=//p' | tr -cd '0-9')
+    [ -n "$id" ] || continue
+    old=$($ESUDO wpa_cli -i "$i" get_network "$id" bgscan 2>/dev/null | head -1)
+    case "$old" in ""|FAIL*|'""') continue;; esac
+    if $ESUDO wpa_cli -i "$i" set_network "$id" bgscan '""' 2>/dev/null | grep -q '^OK'; then
+      wifi_bg="$i $id $old"
+      echo "wifi: $i background scans off while playing (were $old)"
+      break
+    fi
+  done
+fi
+[ -n "$wifi_bg" ] || echo "wifi: background scans left as they are"
+
+# the handheld's settings of F1 > Video (applied here, at the start): CPU governor, GPU speed, RAM speed, zram
+sysset() { grep -s "^$1=" "$GAMEDIR/bt3_settings.txt" | tail -1 | cut -d= -f2 | tr -cd '0-9'; }
 GPU_MHZ=${BT3_GPU_MHZ:-520}
-clock_max=$(grep -s '^clock_max=' "$GAMEDIR/bt3_settings.txt" | tail -1 | cut -d= -f2)
-[ "$clock_max" = "1" ] && GPU_MHZ=99999
+clock_max=$(sysset clock_max)
+gpu_mode=$(sysset gpu_mode)
+[ -z "$gpu_mode" ] && { [ "$clock_max" = "1" ] && gpu_mode=1 || gpu_mode=0; }
+[ "$gpu_mode" = "1" ] && GPU_MHZ=99999
 gpufreq=""
-for d in /sys/class/devfreq/*; do
+[ "$gpu_mode" = "2" ] && echo "GPU: left as the system has it" || for d in /sys/class/devfreq/*; do
   [ -f "$d/available_frequencies" ] || continue
   case "$(basename "$d")$(cat "$d/name" 2>/dev/null)" in *gpu*|*mali*|*ff400000*) gpufreq="$d"; break ;; esac
 done
@@ -198,7 +223,8 @@ if [ -n "$gpufreq" ]; then
   echo "GPU locked at $(cat "$gpufreq/cur_freq" 2>/dev/null) Hz ($gpufreq)"
 fi
 dmcfreq=""
-if [ "${BT3_DMC:-1}" != "0" ]; then
+ram_mode=$(sysset ram_mode)
+if [ "${BT3_DMC:-1}" != "0" ] && [ "$ram_mode" != "1" ]; then
   for d in /sys/class/devfreq/dmc /sys/class/devfreq/*.dmc /sys/devices/platform/dmc/devfreq/dmc; do
     [ -f "$d/available_frequencies" ] && dmcfreq="$d" && break
   done
@@ -211,9 +237,21 @@ if [ -n "$dmcfreq" ]; then
 fi
 cpugov=/sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 [ -f "$cpugov" ] || cpugov=/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-[ -f "$cpugov" ] && old_cpu=$(cat "$cpugov") && echo performance | $ESUDO tee /sys/devices/system/cpu/cpufreq/policy*/scaling_governor /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null 2>&1
+case "$(sysset cpu_governor)" in
+  1) cpu_want=schedutil ;; 2) cpu_want=ondemand ;; 3) cpu_want=conservative ;; 4) cpu_want=powersave ;; 5) cpu_want="" ;; *) cpu_want=performance ;;
+esac
+if [ -n "$cpu_want" ] && [ -f "$cpugov" ]; then
+  grep -qw "$cpu_want" "$(dirname "$cpugov")/scaling_available_governors" 2>/dev/null || cpu_want=performance
+  echo "CPU governor: $cpu_want"
+else
+  [ -f "$cpugov" ] && echo "CPU governor: left as the system has it ($(cat "$cpugov"))"
+  cpugov=/nonexistent
+fi
+[ -f "$cpugov" ] && old_cpu=$(cat "$cpugov") && echo "$cpu_want" | $ESUDO tee /sys/devices/system/cpu/cpufreq/policy*/scaling_governor /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null 2>&1
 
-ZRAM_MB=${BT3_ZRAM_MB:-500}
+zram_set=$(sysset zram_mb)
+ZRAM_MB=${BT3_ZRAM_MB:-${zram_set:-500}}
+[ "$ZRAM_MB" -le 2048 ] 2>/dev/null || ZRAM_MB=500
 zram=""
 if [ "$ZRAM_MB" -gt 0 ]; then
   [ -e /sys/block/zram0 ] || $ESUDO modprobe zram num_devices=1 2>/dev/null
@@ -238,6 +276,8 @@ if [ "$ZRAM_MB" -gt 0 ]; then
   else
     echo "zram: not available in this kernel"
   fi
+else
+  echo "zram: off in the settings, left as the system has it"
 fi
 
 sync
@@ -296,6 +336,10 @@ if [ -n "$dmcfreq" ]; then
 fi
 [ -n "$old_cpu" ] && echo "$old_cpu" | $ESUDO tee /sys/devices/system/cpu/cpufreq/policy*/scaling_governor /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null 2>&1
 for i in $wifi_ps; do $ESUDO iw dev "$i" set power_save on 2>/dev/null; done
+if [ -n "$wifi_bg" ]; then
+  set -- $wifi_bg
+  $ESUDO wpa_cli -i "$1" set_network "$2" bgscan "$3" > /dev/null 2>&1
+fi
 
 
 for svc in $STOPPED_SVC; do $ESUDO systemctl start "$svc" > /dev/null 2>&1; done

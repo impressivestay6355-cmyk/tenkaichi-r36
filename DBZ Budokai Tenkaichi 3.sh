@@ -17,6 +17,8 @@ source "$controlfolder/control.txt"
 get_controls
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "$(readlink -f -- "$0" 2>/dev/null || echo "$0")")" 2>/dev/null && pwd -P)
+# (this script's own place: an update by the game puts its new launcher there, net_update.c)
+export BT3_LAUNCHER="$(readlink -f -- "$0" 2>/dev/null || echo "$0")"
 if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/dbzbt3/bt3.aarch64" ]; then
   GAMEDIR="$SCRIPT_DIR/dbzbt3"
 else

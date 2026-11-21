@@ -25,7 +25,7 @@ Voice chat is not available (no microphone).
 
 | Button | Action |
 | --- | --- |
-| SELECT (hold 2 s) | settings (effects, frame skipping, sound, controls, online, quit) |
+| SELECT (hold 1.5 s) | settings (effects, frame skipping, sound, controls, online, quit) |
 | L3 (in fights) | one full turn of the stick (clashes); can be turned off in Controls |
 | START + SELECT | quit |
 
